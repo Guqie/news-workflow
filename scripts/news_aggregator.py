@@ -26,15 +26,65 @@ class NewsAggregator:
             self.config = json.load(f)
     
     def run_google_news_crawler(self):
-        """运行 Google 新闻爬虫"""
+        """运行 Google 新闻爬虫（扩充版检索策略）"""
         print("\n" + "="*60)
         print("1. 运行 Google 新闻爬虫")
         print("="*60)
         
         if self.sector == 'healthcare':
-            keywords = ["医药产业", "生物医药", "医疗健康", "医保改革"]
-        else:
-            keywords = ["人才政策", "教育改革", "人才培养", "职业教育"]
+            keywords = [
+                # 核心产业词（6个）
+                "医药产业 发展",
+                "生物医药 创新",
+                "医疗健康 政策",
+                "医保 改革",
+                "中医药 产业",
+                "医疗器械 创新",
+                # 政策改革词（5个）
+                "药监 改革",
+                "健康产业 建设",
+                "医疗保障 体系",
+                "卫生健康 事业",
+                "医改 政策",
+                # 创新技术词（5个）
+                "医养结合",
+                "互联网医疗",
+                "智慧医疗",
+                "医疗AI",
+                "数字健康",
+                # 地域产业词（4个）
+                "医药产业 北京",
+                "生物医药 上海",
+                "医疗健康 江苏",
+                "医药产业 广东"
+            ]
+        else:  # education
+            keywords = [
+                # 核心人才词（6个）
+                "人才政策 发展",
+                "教育改革 创新",
+                "人才培养 产业",
+                "职业教育 发展",
+                "高校 人才",
+                "技能人才 培养",
+                # 引进支持词（5个）
+                "科技人才 引进",
+                "青年人才 政策",
+                "人才引进 支持",
+                "高层次人才",
+                "人才战略",
+                # 教育创新词（5个）
+                "人工智能 教育",
+                "数字人才 培养",
+                "产教融合",
+                "校企合作",
+                "双一流 建设",
+                # 地域人才词（4个）
+                "人才政策 北京",
+                "人才引进 上海",
+                "人才培养 江苏",
+                "人才政策 广东"
+            ]
         
         cmd = [
             'python3', 'google_news_crawler.py',
@@ -64,24 +114,42 @@ class NewsAggregator:
             print(f"❌ RSS 新闻爬虫失败: {e}")
     
     def run_rolling_news_crawler(self):
-        """运行滚动新闻爬虫"""
+        """运行通用新闻爬虫（替代滚动新闻爬虫）"""
         print("\n" + "="*60)
-        print("3. 运行滚动新闻爬虫")
+        print("3. 运行通用新闻爬虫")
         print("="*60)
         
-        # 中国经济网即时新闻
-        cmd = [
-            'python3', 'rolling_news_crawler.py',
-            '--sector', self.sector,
-            '--url', 'http://www.ce.cn/cysc/newmain/yc/jsxw/',
-            '--pages', '3'
-        ]
+        # 医疗健康板块的信源
+        if self.sector == 'healthcare':
+            sources = [
+                {'name': '中国经济网', 'url': 'http://www.ce.cn/cysc/newmain/yc/jsxw/'},
+                {'name': '人民网财经', 'url': 'https://finance.people.com.cn/GB/70846/index.html'},
+                {'name': '中国财经医药', 'url': 'https://finance.china.com.cn/industry/medicine/live.shtml'},
+                {'name': '中国科技网', 'url': 'https://www.stdaily.com/web/gdxw/node_324_2.html'}
+            ]
+        else:  # education
+            sources = [
+                {'name': '中国经济网', 'url': 'http://www.ce.cn/cysc/newmain/yc/jsxw/'},
+                {'name': '中国西藏网', 'url': 'http://www.tibet.cn/cn/Instant/'},
+                {'name': '中国科技网', 'url': 'https://www.stdaily.com/web/gdxw/node_324_2.html'}
+            ]
         
-        try:
-            subprocess.run(cmd, cwd=self.script_dir, check=True)
-            print("✅ 滚动新闻爬虫完成")
-        except Exception as e:
-            print(f"❌ 滚动新闻爬虫失败: {e}")
+        # 使用通用爬虫爬取每个信源
+        for source in sources:
+            print(f"\n📰 爬取: {source['name']}")
+            cmd = [
+                'python3', 'universal_crawler.py',
+                '--sector', self.sector,
+                '--url', source['url'],
+                '--pages', '5'
+            ]
+            
+            try:
+                subprocess.run(cmd, cwd=self.script_dir, check=True)
+            except Exception as e:
+                print(f"  ⚠️  {source['name']} 爬取失败: {e}")
+        
+        print("✅ 通用新闻爬虫完成")
     
     def run_newspaper_crawler(self):
         """运行 Newspaper4k 爬虫"""
@@ -114,6 +182,7 @@ class NewsAggregator:
             f'{self.sector}_google_{date_str}.json',
             f'{self.sector}_rss_{date_str}.json',
             f'{self.sector}_rolling_{date_str}.json',
+            f'{self.sector}_universal_{date_str}.json',  # 通用爬虫数据
             f'{self.sector}_newspaper_{date_str}.json'
         ]
         
