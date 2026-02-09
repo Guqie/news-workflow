@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+
+# 数据文件（不上传原始数据）
+data/raw/*.json
+data/raw/*.txt
+data/raw/*.md
+data/raw/backup_*/
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.bak
+*~
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 保留目录结构
+!data/raw/.gitkeep
