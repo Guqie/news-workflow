@@ -50,8 +50,8 @@ with open(output_file, 'w', newline='', encoding='utf-8-sig') as f:
         writer.writerow([
             news.get('title', ''),
             news.get('source', ''),
-            news.get('link', ''),
-            news.get('pubDate', '')
+            news.get('url', ''),
+            news.get('published_date', '')
         ])
 
 print(f"\n导出完成！共 {len(final_news)} 条新闻")
