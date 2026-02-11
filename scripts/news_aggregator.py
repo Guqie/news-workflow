@@ -58,6 +58,60 @@ class NewsAggregator:
                 "医疗健康 江苏",
                 "医药产业 广东"
             ]
+        elif self.sector == 'strategic_emerging':
+            keywords = [
+                # 核心产业词（6个）
+                "战略新兴产业 发展",
+                "新能源 产业",
+                "光伏产业 发展",
+                "风电 产业",
+                "新能源汽车 产业",
+                "储能 技术",
+                # 高端制造词（5个）
+                "半导体 产业",
+                "芯片 制造",
+                "新材料 产业",
+                "高端装备 制造",
+                "智能制造 发展",
+                # 创新技术词（5个）
+                "人工智能 产业",
+                "大数据 产业",
+                "云计算 发展",
+                "物联网 应用",
+                "区块链 技术",
+                # 生物医药词（4个）
+                "生物医药 创新",
+                "创新药 研发",
+                "医疗器械 产业",
+                "基因技术 应用"
+            ]
+        elif self.sector == 'hightech':
+            keywords = [
+                # 核心科技词（6个）
+                "高科技产业 发展",
+                "人工智能 技术",
+                "芯片 技术",
+                "半导体 技术",
+                "集成电路 产业",
+                "5G 技术",
+                # 前沿技术词（5个）
+                "量子计算 研究",
+                "量子通信 技术",
+                "6G 研发",
+                "先进制造 技术",
+                "工业机器人 应用",
+                # 数字经济词（5个）
+                "云计算 技术",
+                "大数据 应用",
+                "物联网 技术",
+                "工业互联网 平台",
+                "数字化转型",
+                # 政策支持词（4个）
+                "科技创新 政策",
+                "高新技术 支持",
+                "科技产业 投资",
+                "技术突破 成果"
+            ]
         else:  # education
             keywords = [
                 # 核心人才词（6个）
@@ -126,6 +180,22 @@ class NewsAggregator:
                 {'name': '人民网财经', 'url': 'https://finance.people.com.cn/GB/70846/index.html'},
                 {'name': '中国财经医药', 'url': 'https://finance.china.com.cn/industry/medicine/live.shtml'},
                 {'name': '中国科技网', 'url': 'https://www.stdaily.com/web/gdxw/node_324_2.html'}
+            ]
+        elif self.sector == 'strategic_emerging':
+            sources = [
+                {'name': '人民网财经', 'url': 'https://finance.people.com.cn/GB/70846/index.html'},
+                {'name': '新华网财经', 'url': 'http://www.xinhuanet.com/fortune/'},
+                {'name': '中国经济网', 'url': 'http://www.ce.cn/cysc/newmain/yc/jsxw/'},
+                {'name': '中国科技网', 'url': 'https://www.stdaily.com/web/gdxw/node_324_2.html'},
+                {'name': '东方财富网', 'url': 'https://finance.eastmoney.com/'}
+            ]
+        elif self.sector == 'hightech':
+            sources = [
+                {'name': '人民网科技', 'url': 'http://scitech.people.com.cn/'},
+                {'name': '新华网科技', 'url': 'http://www.xinhuanet.com/tech/'},
+                {'name': '中国科技网', 'url': 'https://www.stdaily.com/web/gdxw/node_324_2.html'},
+                {'name': '中国经济网', 'url': 'http://www.ce.cn/cysc/newmain/yc/jsxw/'},
+                {'name': '东方财富网', 'url': 'https://finance.eastmoney.com/'}
             ]
         else:  # education
             sources = [
@@ -281,8 +351,9 @@ if __name__ == '__main__':
     import argparse
     
     parser = argparse.ArgumentParser(description='统一新闻聚合器')
-    parser.add_argument('--sector', required=True, choices=['healthcare', 'education'], 
-                        help='板块: healthcare 或 education')
+    parser.add_argument('--sector', required=True, 
+                        choices=['healthcare', 'education', 'strategic_emerging', 'hightech'], 
+                        help='板块: healthcare, education, strategic_emerging 或 hightech')
     parser.add_argument('--hours', type=int, default=24, help='时间范围（小时）')
     
     args = parser.parse_args()

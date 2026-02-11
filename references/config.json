@@ -5,22 +5,26 @@
       "daily_target": 8,
       "keywords": [
         "战略新兴产业", "新兴产业", "战略性新兴产业",
-        "光伏", "光伏产业", "太阳能发电", "风电", "风力发电", "海上风电",
-        "储能", "储能技术", "电池储能", "氢能", "氢能源", "绿氢",
-        "新能源汽车", "电动汽车", "智能网联汽车",
-        "半导体材料", "芯片材料", "新材料", "碳纤维", "石墨烯",
-        "复合材料", "高分子材料", "稀土", "稀土材料",
-        "人工智能", "AI产业", "大模型", "大数据", "数据中心",
-        "云计算", "云服务", "区块链", "数字货币", "物联网", "工业互联网",
-        "智能制造", "工业机器人", "航空航天", "商业航天", "卫星",
-        "高端装备", "先进装备", "精密仪器", "高端仪器",
-        "创新药", "生物医药", "医疗器械", "高端医疗设备", "基因技术", "细胞治疗"
+        "人工智能", "AI产业", "大模型", "人形机器人", "具身智能",
+        "无人机", "低空经济", "商业航天", "卫星", "火箭",
+        "芯片", "半导体", "集成电路", "算力", "数据中心",
+        "先进封装", "液冷", "光纤", "变压器",
+        "量子通信", "量子计算", "脑机接口",
+        "生物医药", "创新药", "疫苗", "基因检测",
+        "高端装备", "智能装备", "高端机床",
+        "新材料", "先进有色金属", "碳纤维", "石墨烯",
+        "合成生物", "可控核聚变"
       ],
       "news_sources": [
-        {"name": "人民网财经", "url": "http://finance.people.com.cn/", "type": "门户网站"},
-        {"name": "新华网财经", "url": "http://www.xinhuanet.com/fortune/", "type": "门户网站"},
-        {"name": "发改委", "url": "https://www.ndrc.gov.cn/", "type": "政府网站"},
-        {"name": "工信部", "url": "https://www.miit.gov.cn/", "type": "政府网站"}
+        {"name": "科创板日报", "url": "https://www.cls.cn/telegraph", "type": "财经媒体"},
+        {"name": "财联社", "url": "https://www.cls.cn/telegraph", "type": "财经媒体"},
+        {"name": "中国金融信息网", "url": "http://www.cnfin.com/", "type": "财经媒体"},
+        {"name": "证券时报", "url": "http://kuaixun.stcn.com/", "type": "财经媒体"},
+        {"name": "上海证券报", "url": "https://news.cnstock.com/", "type": "财经媒体"},
+        {"name": "经济参考网", "url": "http://www.jjckb.cn/", "type": "财经媒体"},
+        {"name": "新华社", "url": "http://www.xinhuanet.com/tech/", "type": "门户网站"},
+        {"name": "东方财富网", "url": "https://finance.eastmoney.com/", "type": "财经媒体"},
+        {"name": "人民网财经", "url": "http://finance.people.com.cn/", "type": "门户网站"}
       ]
     },
     "hightech": {
@@ -28,17 +32,26 @@
       "daily_target": 8,
       "keywords": [
         "高科技产业", "高新技术", "科技产业", "高技术产业",
-        "人工智能", "芯片", "半导体", "集成电路",
-        "5G", "6G", "量子计算", "量子通信",
+        "人工智能", "AI", "大模型", "人形机器人", "具身智能",
+        "芯片", "半导体", "集成电路", "算力", "先进封装",
+        "量子计算", "量子通信", "量子科技",
+        "5G", "6G", "通信技术",
+        "脑机接口", "生物医药", "创新药", "基因检测",
+        "商业航天", "卫星", "火箭", "低空经济", "无人机",
+        "智能制造", "工业机器人", "高端装备",
         "云计算", "大数据", "物联网", "工业互联网",
-        "机器人", "智能制造", "先进制造",
-        "产业", "发展", "创新", "突破", "政策", "投资"
+        "合成生物", "可控核聚变", "液冷技术"
       ],
       "news_sources": [
-        {"name": "科技部", "url": "https://www.most.gov.cn/", "type": "政府网站"},
-        {"name": "工信部", "url": "https://www.miit.gov.cn/", "type": "政府网站"},
-        {"name": "人民网科技", "url": "http://scitech.people.com.cn/", "type": "门户网站"},
-        {"name": "新华网科技", "url": "http://www.xinhuanet.com/tech/", "type": "门户网站"}
+        {"name": "科创板日报", "url": "https://www.cls.cn/telegraph", "type": "财经媒体"},
+        {"name": "财联社", "url": "https://www.cls.cn/telegraph", "type": "财经媒体"},
+        {"name": "中国金融信息网", "url": "http://www.cnfin.com/", "type": "财经媒体"},
+        {"name": "证券时报", "url": "http://kuaixun.stcn.com/", "type": "财经媒体"},
+        {"name": "上海证券报", "url": "https://news.cnstock.com/", "type": "财经媒体"},
+        {"name": "同花顺财经", "url": "http://news.10jqka.com.cn/", "type": "财经媒体"},
+        {"name": "C114通信网", "url": "https://www.c114.com.cn/", "type": "行业网站"},
+        {"name": "新华社", "url": "http://www.xinhuanet.com/tech/", "type": "门户网站"},
+        {"name": "东方财富网", "url": "https://finance.eastmoney.com/", "type": "财经媒体"}
       ]
     }
   },
@@ -51,5 +64,20 @@
     "timeout": 10,
     "max_retries": 3,
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+  },
+  "filter_criteria": {
+    "categories": [
+      "政策类（部委、产业集群、北京上海政策）",
+      "龙头企业动态（投融资、战略合作、技术突破）",
+      "热度热点信息",
+      "重大技术突破（技术验证→商业化）",
+      "重点数据（万亿千亿级市场规模、增长率）",
+      "龙头企业家讲话预测",
+      "榜单类"
+    ],
+    "exclude_keywords": [
+      "新能源汽车", "电动汽车", "风电", "光伏", "太阳能发电",
+      "节能环保", "动力电池"
+    ]
   }
 }

@@ -9,9 +9,15 @@ venv/
 
 # 数据文件（不上传原始数据）
 data/raw/*.json
+data/raw/*.csv
 data/raw/*.txt
 data/raw/*.md
 data/raw/backup_*/
+
+# 敏感文档
+references/*.docx
+references/*交接*
+references/config_optimized.json
 
 # 日志文件
 *.log
