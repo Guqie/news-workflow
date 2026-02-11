@@ -9,6 +9,8 @@ import os
 import subprocess
 from datetime import datetime
 from collections import defaultdict
+from content_extractor import NewsContentExtractor
+from deduplicator import NewsDeduplicator
 
 class NewsAggregator:
     """统一新闻聚合器"""
@@ -275,21 +277,9 @@ class NewsAggregator:
         print("5. 去重和排序")
         print("="*60)
         
-        # 去重
-        seen_titles = set()
-        unique_news = []
-        
-        for news in self.all_news:
-            title = news.get('title', '')
-            if title and title not in seen_titles:
-                seen_titles.add(title)
-                unique_news.append(news)
-        
-        removed = len(self.all_news) - len(unique_news)
-        print(f"  🔄 去重: 移除 {removed} 条重复新闻")
-        
-        self.all_news = unique_news
-        print(f"  📊 去重后: {len(self.all_news)} 条新闻")
+        # 使用智能去重器（相似度阈值80%）
+        deduplicator = NewsDeduplicator(similarity_threshold=0.8)
+        self.all_news = deduplicator.deduplicate(self.all_news)
     
     def save_aggregated_results(self):
         """保存聚合结果"""
@@ -340,7 +330,14 @@ class NewsAggregator:
         # 6. 去重和排序
         self.deduplicate_and_sort()
         
-        # 7. 保存聚合结果
+        # 7. 异步提取内容（解码URL + 提取正文）
+        print("\n" + "="*60)
+        print("开始提取新闻内容...")
+        print("="*60)
+        extractor = NewsContentExtractor(max_workers=10)
+        self.all_news = extractor.process_news_list_async(self.all_news)
+        
+        # 8. 保存聚合结果
         self.save_aggregated_results()
         
         print("\n" + "✅"*30)

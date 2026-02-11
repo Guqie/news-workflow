@@ -26,6 +26,18 @@ class Newspaper4kCrawler:
             'education': [
                 'http://edu.people.com.cn',  # 人民网教育
                 'https://news.sciencenet.cn',  # 科学网
+            ],
+            'strategic_emerging': [
+                'http://www.xinhuanet.com/fortune/',  # 新华网财经
+                'http://finance.people.com.cn/',  # 人民网财经
+                'http://www.ce.cn/cysc/',  # 中国经济网产经
+                'https://www.stdaily.com/',  # 科技日报
+            ],
+            'hightech': [
+                'http://www.xinhuanet.com/tech/',  # 新华网科技
+                'http://scitech.people.com.cn/',  # 人民网科技
+                'http://www.ce.cn/cysc/tech/',  # 中国经济网科技
+                'https://www.stdaily.com/',  # 科技日报
             ]
         }
     
@@ -127,8 +139,9 @@ if __name__ == '__main__':
     import argparse
     
     parser = argparse.ArgumentParser(description='Newspaper4k 新闻提取器')
-    parser.add_argument('--sector', required=True, choices=['healthcare', 'education'], 
-                        help='板块: healthcare 或 education')
+    parser.add_argument('--sector', required=True, 
+                        choices=['healthcare', 'education', 'strategic_emerging', 'hightech'], 
+                        help='板块: healthcare, education, strategic_emerging, hightech')
     parser.add_argument('--hours', type=int, default=24, help='时间范围（小时）')
     
     args = parser.parse_args()
