@@ -209,8 +209,9 @@ if __name__ == '__main__':
     import argparse
     
     parser = argparse.ArgumentParser(description='新闻搜索爬虫')
-    parser.add_argument('--sector', required=True, choices=['healthcare', 'education'], 
-                        help='板块: healthcare 或 education')
+    parser.add_argument('--sector', required=True, 
+                        choices=['healthcare', 'education', 'strategic_emerging', 'hightech'], 
+                        help='板块: healthcare, education, strategic_emerging, hightech')
     parser.add_argument('--keywords', nargs='+', help='搜索关键词列表')
     parser.add_argument('--count', type=int, default=10, help='每个关键词的最大结果数')
     
@@ -222,8 +223,12 @@ if __name__ == '__main__':
     if not args.keywords:
         if args.sector == 'healthcare':
             keywords = ["医药产业 发展", "生物医药 创新", "医疗健康 政策", "医保 改革"]
-        else:
+        elif args.sector == 'education':
             keywords = ["人才政策 发展", "教育改革 创新", "人才培养 产业", "职业教育 发展"]
+        elif args.sector == 'strategic_emerging':
+            keywords = ["战略新兴产业", "新能源 发展", "新材料 产业", "数字经济"]
+        elif args.sector == 'hightech':
+            keywords = ["高科技产业", "人工智能 发展", "芯片 产业", "半导体"]
     else:
         keywords = args.keywords
     

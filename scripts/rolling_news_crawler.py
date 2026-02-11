@@ -301,7 +301,7 @@ class RollingNewsCrawler:
         self.results = unique_results
     
     def save_results(self):
-        """保存结果"""
+        """保存结果（追加模式）"""
         script_dir = os.path.dirname(os.path.abspath(__file__))
         data_dir = os.path.join(script_dir, '../data/raw')
         os.makedirs(data_dir, exist_ok=True)
@@ -309,11 +309,33 @@ class RollingNewsCrawler:
         date_str = datetime.now().strftime('%Y%m%d')
         filename = os.path.join(data_dir, f"{self.sector}_rolling_{date_str}.json")
         
+        # 如果文件已存在，先加载现有数据
+        existing_data = []
+        if os.path.exists(filename):
+            try:
+                with open(filename, 'r', encoding='utf-8') as f:
+                    existing_data = json.load(f)
+            except:
+                existing_data = []
+        
+        # 合并数据
+        all_data = existing_data + self.results
+        
+        # 去重
+        seen_urls = set()
+        unique_data = []
+        for item in all_data:
+            url = item.get('url', '')
+            if url and url not in seen_urls:
+                seen_urls.add(url)
+                unique_data.append(item)
+        
+        # 保存
         with open(filename, 'w', encoding='utf-8') as f:
-            json.dump(self.results, f, ensure_ascii=False, indent=2)
+            json.dump(unique_data, f, ensure_ascii=False, indent=2)
         
         print(f"\n💾 已保存到: {filename}")
-        print(f"📊 共保存: {len(self.results)} 条新闻")
+        print(f"📊 共保存: {len(unique_data)} 条新闻（本次新增: {len(self.results)} 条）")
 
 
 def main():
@@ -324,7 +346,7 @@ def main():
                        help='板块')
     parser.add_argument('--url', help='滚动新闻URL（单个爬取）')
     parser.add_argument('--all', action='store_true', help='爬取配置文件中的所有新闻源')
-    parser.add_argument('--pages', type=int, default=3, help='翻页数')
+    parser.add_argument('--pages', type=int, default=10, help='翻页数')
     args = parser.parse_args()
     
     crawler = RollingNewsCrawler(args.sector)

@@ -127,8 +127,9 @@ if __name__ == '__main__':
     import argparse
     
     parser = argparse.ArgumentParser(description='Google 新闻搜索爬虫')
-    parser.add_argument('--sector', required=True, choices=['healthcare', 'education'], 
-                        help='板块: healthcare 或 education')
+    parser.add_argument('--sector', required=True, 
+                        choices=['healthcare', 'education', 'strategic_emerging', 'hightech'], 
+                        help='板块: healthcare, education, strategic_emerging, hightech')
     parser.add_argument('--hours', type=int, default=24, help='时间范围（小时）')
     parser.add_argument('--keywords', nargs='+', help='搜索关键词列表')
     
@@ -140,8 +141,12 @@ if __name__ == '__main__':
     if not args.keywords:
         if args.sector == 'healthcare':
             keywords = ["医药产业", "生物医药", "医疗健康", "医保改革"]
-        else:
+        elif args.sector == 'education':
             keywords = ["人才政策", "教育改革", "人才培养", "职业教育"]
+        elif args.sector == 'strategic_emerging':
+            keywords = ["战略新兴产业", "新能源", "新材料", "数字经济"]
+        elif args.sector == 'hightech':
+            keywords = ["高科技产业", "人工智能", "芯片", "半导体"]
     else:
         keywords = args.keywords
     

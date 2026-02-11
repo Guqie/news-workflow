@@ -1,40 +1,44 @@
 {
   "sectors": {
-    "education": {
-      "name": "教育人才",
-      "daily_target": 6,
-      "keywords": [
-        "教育", "人才", "高校", "职业教育", "培训", "招聘", "就业", 
-        "人才政策", "大学", "学校", "师资", "科研", "学生", "毕业生",
-        "产业", "发展", "创新", "服务", "建设", "改革", "劳动", "社保"
-      ],
-      "news_sources": [
-        {"name": "中国教育报", "url": "http://paper.jyb.cn/zgjyb/", "type": "专业网站"},
-        {"name": "人民网教育", "url": "http://edu.people.com.cn/GB/1053/index.html", "type": "门户网站"},
-        {"name": "科学网", "url": "https://news.sciencenet.cn/", "type": "专业网站"},
-        {"name": "中工网滚动新闻", "url": "https://www.workercn.cn/roll/", "type": "门户网站"},
-        {"name": "人社部地方动态", "url": "https://www.mohrss.gov.cn/SYrlzyhshbzb/dongtaixinwen/dfdt/", "type": "政府网站"},
-        {"name": "京报网热点", "url": "https://www.bjd.com.cn/app/rdjh/redian/", "type": "门户网站"}
-      ]
-    },
-    "healthcare": {
-      "name": "医疗健康",
+    "strategic_emerging": {
+      "name": "战略新兴产业",
       "daily_target": 8,
       "keywords": [
-        "医疗", "健康", "医药", "生物医药", "医院", "医疗器械", 
-        "健康产业", "医保", "卫生", "中医药", "医改", "药监", 
-        "就医", "参保", "医疗保障", "创新药", "制药", "医养", "诊疗",
-        "产业", "发展", "创新", "服务", "保障", "改革", "建设"
+        "战略新兴产业", "新兴产业", "战略性新兴产业",
+        "光伏", "光伏产业", "太阳能发电", "风电", "风力发电", "海上风电",
+        "储能", "储能技术", "电池储能", "氢能", "氢能源", "绿氢",
+        "新能源汽车", "电动汽车", "智能网联汽车",
+        "半导体材料", "芯片材料", "新材料", "碳纤维", "石墨烯",
+        "复合材料", "高分子材料", "稀土", "稀土材料",
+        "人工智能", "AI产业", "大模型", "大数据", "数据中心",
+        "云计算", "云服务", "区块链", "数字货币", "物联网", "工业互联网",
+        "智能制造", "工业机器人", "航空航天", "商业航天", "卫星",
+        "高端装备", "先进装备", "精密仪器", "高端仪器",
+        "创新药", "生物医药", "医疗器械", "高端医疗设备", "基因技术", "细胞治疗"
       ],
       "news_sources": [
-        {"name": "健康报行业快讯", "url": "https://www.jkb.com.cn/news/industryNews", "type": "专业网站", "method": "json_extract"},
-        {"name": "医药网最新资讯", "url": "https://news.pharmnet.com.cn/news/hyyw/news/index0.html", "type": "专业网站"},
-        {"name": "北京卫健委", "url": "https://wjw.beijing.gov.cn/sy_20013/", "type": "政府网站"},
-        {"name": "中国财经医药滚动新闻", "url": "https://finance.china.com.cn/industry/medicine/live.shtml", "type": "门户网站"},
-        {"name": "中国证券报财经要闻", "url": "https://www.cs.com.cn/xwzx/hg/", "type": "财经网站"},
-        {"name": "财联社头条", "url": "https://www.cls.cn/depth?id=1000", "type": "财经网站"},
-        {"name": "观点网资讯", "url": "https://www.guandian.cn/news/", "type": "行业网站"},
-        {"name": "经济参考报要闻", "url": "http://jjckb.xinhuanet.com/yw.htm", "type": "财经网站"}
+        {"name": "人民网财经", "url": "http://finance.people.com.cn/", "type": "门户网站"},
+        {"name": "新华网财经", "url": "http://www.xinhuanet.com/fortune/", "type": "门户网站"},
+        {"name": "发改委", "url": "https://www.ndrc.gov.cn/", "type": "政府网站"},
+        {"name": "工信部", "url": "https://www.miit.gov.cn/", "type": "政府网站"}
+      ]
+    },
+    "hightech": {
+      "name": "高科技产业",
+      "daily_target": 8,
+      "keywords": [
+        "高科技产业", "高新技术", "科技产业", "高技术产业",
+        "人工智能", "芯片", "半导体", "集成电路",
+        "5G", "6G", "量子计算", "量子通信",
+        "云计算", "大数据", "物联网", "工业互联网",
+        "机器人", "智能制造", "先进制造",
+        "产业", "发展", "创新", "突破", "政策", "投资"
+      ],
+      "news_sources": [
+        {"name": "科技部", "url": "https://www.most.gov.cn/", "type": "政府网站"},
+        {"name": "工信部", "url": "https://www.miit.gov.cn/", "type": "政府网站"},
+        {"name": "人民网科技", "url": "http://scitech.people.com.cn/", "type": "门户网站"},
+        {"name": "新华网科技", "url": "http://www.xinhuanet.com/tech/", "type": "门户网站"}
       ]
     }
   },
