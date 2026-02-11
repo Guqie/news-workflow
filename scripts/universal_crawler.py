@@ -322,8 +322,9 @@ if __name__ == '__main__':
     import argparse
     
     parser = argparse.ArgumentParser(description='通用新闻爬虫')
-    parser.add_argument('--sector', required=True, choices=['healthcare', 'education'],
-                        help='板块: healthcare 或 education')
+    parser.add_argument('--sector', required=True, 
+                        choices=['healthcare', 'education', 'strategic_emerging', 'hightech'],
+                        help='板块: healthcare, education, strategic_emerging, hightech')
     parser.add_argument('--url', required=True, help='新闻网站URL')
     parser.add_argument('--pages', type=int, default=3, help='翻页数（暂不支持）')
     

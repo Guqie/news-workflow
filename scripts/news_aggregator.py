@@ -9,6 +9,7 @@ import os
 import subprocess
 from datetime import datetime
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from content_extractor import NewsContentExtractor
 from deduplicator import NewsDeduplicator
 
@@ -241,6 +242,32 @@ class NewsAggregator:
         except Exception as e:
             print(f"❌ Newspaper4k 爬虫失败: {e}")
     
+    def run_all_crawlers_parallel(self):
+        """并行运行所有爬虫"""
+        print("\n" + "="*60)
+        print("异步并行新闻聚合")
+        print("="*60)
+        
+        with ThreadPoolExecutor(max_workers=3) as executor:
+            futures = {
+                executor.submit(self.run_google_news_crawler): "Google搜索",
+                executor.submit(self.run_rolling_news_crawler): "通用爬虫",
+                executor.submit(self.run_newspaper_crawler): "Newspaper4k"
+            }
+            
+            results = {}
+            for future in as_completed(futures):
+                task_name = futures[future]
+                try:
+                    future.result()
+                    results[task_name] = True
+                    print(f"✓ {task_name} 完成")
+                except Exception as e:
+                    print(f"✗ {task_name} 失败: {e}")
+                    results[task_name] = False
+        
+        print(f"\n并行任务完成: {sum(results.values())}/{len(results)} 成功")
+    
     def load_all_news(self):
         """加载所有爬取的新闻"""
         print("\n" + "="*60)
@@ -305,39 +332,29 @@ class NewsAggregator:
         for i, news in enumerate(self.all_news[:10], 1):
             print(f"{i}. {news.get('title', '无标题')}")
     
-    def run(self):
+    def run(self, parallel=True):
         """运行完整流程"""
         print("\n" + "🚀"*30)
         print(f"开始新闻聚合 - {self.config['sectors'][self.sector]['name']}")
         print(f"时间范围: 最近 {self.hours} 小时")
         print("🚀"*30)
         
-        # 1. 运行 Google 新闻爬虫
-        self.run_google_news_crawler()
+        if parallel:
+            # 并行执行所有爬虫
+            self.run_all_crawlers_parallel()
+        else:
+            # 顺序执行（保留旧版本）
+            self.run_google_news_crawler()
+            self.run_rolling_news_crawler()
+            self.run_newspaper_crawler()
         
-        # 2. 运行 RSS 新闻爬虫 (已禁用 - 时效性差)
-        # self.run_rss_crawler()
-        
-        # 3. 运行滚动新闻爬虫
-        self.run_rolling_news_crawler()
-        
-        # 4. 运行 Newspaper4k 爬虫
-        self.run_newspaper_crawler()
-        
-        # 5. 加载所有新闻
+        # 加载所有新闻
         self.load_all_news()
         
-        # 6. 去重和排序
+        # 去重和排序
         self.deduplicate_and_sort()
         
-        # 7. 异步提取内容（解码URL + 提取正文）
-        print("\n" + "="*60)
-        print("开始提取新闻内容...")
-        print("="*60)
-        extractor = NewsContentExtractor(max_workers=10)
-        self.all_news = extractor.process_news_list_async(self.all_news)
-        
-        # 8. 保存聚合结果
+        # 保存聚合结果（不提取内容）
         self.save_aggregated_results()
         
         print("\n" + "✅"*30)
